@@ -5,6 +5,8 @@ from django.db import models
 from django.db.models import Sum
 from django.utils import timezone
 
+from .barcode_utils import generate_product_barcode
+
 
 class Warehouse(models.Model):
     name = models.CharField('اسم المستودع', max_length=200)
@@ -57,7 +59,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.barcode:
-            self.barcode = self.sku.replace('-', '').upper()[:20] or uuid.uuid4().hex[:12].upper()
+            self.barcode = generate_product_barcode(sku=self.sku, exclude_pk=self.pk)
         super().save(*args, **kwargs)
 
     @property

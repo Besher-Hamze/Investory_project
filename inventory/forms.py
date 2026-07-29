@@ -10,13 +10,24 @@ class ArabicAuthenticationForm(AuthenticationForm):
 
 
 class ProductForm(forms.ModelForm):
+    auto_barcode = forms.BooleanField(
+        required=False,
+        initial=True,
+        label='توليد باركود تلقائياً عند الحفظ',
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'id_auto_barcode'}),
+    )
+
     class Meta:
         model = Product
         fields = ['name', 'sku', 'barcode', 'price', 'min_quantity', 'shelf', 'rack_number', 'description', 'is_active']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'sku': forms.TextInput(attrs={'class': 'form-control'}),
-            'barcode': forms.TextInput(attrs={'class': 'form-control'}),
+            'sku': forms.TextInput(attrs={'class': 'form-control', 'id': 'id_sku', 'placeholder': 'مثال: SKU-007'}),
+            'barcode': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'id_barcode',
+                'placeholder': 'اضغط "توليد باركود" أو اتركه فارغاً للتوليد التلقائي',
+            }),
             'price': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
             'min_quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'shelf': forms.TextInput(attrs={'class': 'form-control'}),
@@ -35,6 +46,34 @@ class ProductForm(forms.ModelForm):
             'description': 'الوصف',
             'is_active': 'نشط',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['barcode'].required = False
+        self.fields['barcode'].help_text = 'باركود EAN-13 — يُولَّد تلقائياً من SKU إذا تُرك فارغاً.'
+        if self.instance.pk:
+            self.fields['auto_barcode'].initial = False
+
+    def clean(self):
+        cleaned_data = super().clean()
+        auto_barcode = cleaned_data.pop('auto_barcode', False)
+        sku = cleaned_data.get('sku', '')
+        barcode = cleaned_data.get('barcode', '').strip()
+        exclude_pk = self.instance.pk if self.instance.pk else None
+
+        if auto_barcode or not barcode:
+            cleaned_data['barcode'] = generate_product_barcode(sku=sku, exclude_pk=exclude_pk)
+        elif not _is_available_barcode(barcode, exclude_pk):
+            self.add_error('barcode', 'هذا الباركود مستخدم لمنتج آخر.')
+        return cleaned_data
+
+
+def _is_available_barcode(barcode, exclude_pk=None):
+    from .models import Product
+    qs = Product.objects.filter(barcode=barcode)
+    if exclude_pk:
+        qs = qs.exclude(pk=exclude_pk)
+    return not qs.exists()
 
 
 class WarehouseForm(forms.ModelForm):

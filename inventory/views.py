@@ -23,7 +23,8 @@ from .forms import (
     WarehouseForm,
 )
 from .models import MovementType, Notification, Product, StockLevel, StockMovement, Warehouse
-from .pdf_utils import render_arabic_pdf
+from .barcode_utils import generate_product_barcode
+from .pdf_utils import render_report_pdf
 from .services import (
     StockError,
     aggregate_stock_value,
@@ -256,6 +257,18 @@ def barcode_scanner(request):
 
 @login_required
 @require_GET
+def api_generate_barcode(request):
+    sku = request.GET.get('sku', '').strip()
+    exclude_pk = request.GET.get('exclude_pk')
+    barcode = generate_product_barcode(
+        sku=sku,
+        exclude_pk=int(exclude_pk) if exclude_pk else None,
+    )
+    return JsonResponse({'barcode': barcode})
+
+
+@login_required
+@require_GET
 def api_product_by_barcode(request):
     barcode = request.GET.get('barcode', '').strip()
     product = get_product_by_barcode(barcode)
@@ -370,9 +383,9 @@ def report_financial(request):
     })
 
 
-def _render_pdf(html_content, filename):
+def _render_pdf(report_type, context, filename):
     try:
-        pdf_bytes = render_arabic_pdf(html_content)
+        pdf_bytes = render_report_pdf(report_type, context)
         if not pdf_bytes:
             return None
         response = HttpResponse(pdf_bytes, content_type='application/pdf')
@@ -384,9 +397,8 @@ def _render_pdf(html_content, filename):
 
 @login_required
 def report_pdf(request, report_type):
-    context = {}
-    template_name = ''
     filename = 'report.pdf'
+    context = {}
 
     if report_type == 'current_stock':
         warehouse_id = request.GET.get('warehouse')
@@ -396,9 +408,7 @@ def report_pdf(request, report_type):
         context = {
             'stock_levels': stock_levels,
             'total_value': aggregate_stock_value(stock_levels),
-            'title': 'تقرير المخزون الحالي',
         }
-        template_name = 'inventory/reports/pdf/current_stock.html'
         filename = 'current_stock.pdf'
     elif report_type == 'turnover':
         days = int(request.GET.get('days', 30))
@@ -412,27 +422,32 @@ def report_pdf(request, report_type):
             .annotate(total_out=Sum('quantity'))
             .order_by('-total_out')
         )
-        context = {'outbound': outbound, 'days': days, 'title': 'تقرير دوران المخزون'}
-        template_name = 'inventory/reports/pdf/turnover.html'
+        context = {'outbound': outbound, 'days': days}
         filename = 'turnover.pdf'
     elif report_type == 'financial':
         stock_levels = StockLevel.objects.select_related('product', 'warehouse')
-        by_warehouse = stock_value_by_warehouse(stock_levels)
         context = {
-            'by_warehouse': by_warehouse,
+            'by_warehouse': stock_value_by_warehouse(stock_levels),
             'total_value': aggregate_stock_value(stock_levels),
-            'stock_levels': stock_levels,
-            'title': 'تقرير المخزون المالي',
         }
-        template_name = 'inventory/reports/pdf/financial.html'
         filename = 'financial.pdf'
+    elif report_type == 'slow_moving':
+        days = int(request.GET.get('days', 60))
+        since = timezone.now() - timedelta(days=days)
+        active_product_ids = StockMovement.objects.filter(
+            created_at__gte=since,
+        ).values_list('product_id', flat=True).distinct()
+        slow_products = Product.objects.filter(is_active=True).exclude(
+            id__in=active_product_ids,
+        ).annotate(total=Sum('stock_levels__quantity')).filter(total__gt=0)
+        context = {'slow_products': slow_products, 'days': days}
+        filename = 'slow_moving.pdf'
     else:
         messages.error(request, 'نوع التقرير غير موجود.')
         return redirect('dashboard')
 
-    html = render(request, template_name, context).content.decode('utf-8')
-    pdf_response = _render_pdf(html, filename)
+    pdf_response = _render_pdf(report_type, context, filename)
     if pdf_response:
         return pdf_response
-    messages.warning(request, 'تعذر إنشاء PDF. يتم عرض النسخة القابلة للطباعة.')
-    return render(request, template_name.replace('/pdf/', '/print/'), context)
+    messages.error(request, 'تعذر إنشاء ملف PDF.')
+    return redirect('dashboard')

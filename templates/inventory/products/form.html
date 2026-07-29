@@ -5,15 +5,74 @@
     <div class="col-lg-8">
         <div class="card form-card p-4">
             <h3 class="mb-4">{{ title }}</h3>
-            <form method="post">
+            <form method="post" id="productForm">
                 {% csrf_token %}
-                {% for field in form %}
+
                 <div class="mb-3">
-                    <label class="form-label">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.errors %}<div class="text-danger small">{{ field.errors.0 }}</div>{% endif %}
+                    <label class="form-label">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="text-danger small">{{ form.name.errors.0 }}</div>{% endif %}
                 </div>
-                {% endfor %}
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.sku.label }}</label>
+                    {{ form.sku }}
+                    <div class="form-text">أدخل SKU أولاً ثم اضغط توليد باركود</div>
+                    {% if form.sku.errors %}<div class="text-danger small">{{ form.sku.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.barcode.label }}</label>
+                    <div class="input-group">
+                        {{ form.barcode }}
+                        <button type="button" class="btn btn-outline-primary" id="generateBarcodeBtn">
+                            <i class="bi bi-upc"></i> توليد باركود
+                        </button>
+                    </div>
+                    {% if form.barcode.help_text %}<div class="form-text">{{ form.barcode.help_text }}</div>{% endif %}
+                    {% if form.barcode.errors %}<div class="text-danger small">{{ form.barcode.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check">
+                        {{ form.auto_barcode }}
+                        <label class="form-check-label" for="id_auto_barcode">{{ form.auto_barcode.label }}</label>
+                    </div>
+                </div>
+
+                <div class="mb-4 p-3 border rounded bg-light text-center" id="barcodePreviewBox">
+                    <div class="text-muted small mb-2">معاينة الباركود</div>
+                    <svg id="barcodePreview"></svg>
+                    <div class="small mt-2"><code id="barcodePreviewText">—</code></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.price.label }}</label>
+                    {{ form.price }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ form.min_quantity.label }}</label>
+                    {{ form.min_quantity }}
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.shelf.label }}</label>
+                        {{ form.shelf }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.rack_number.label }}</label>
+                        {{ form.rack_number }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ form.description.label }}</label>
+                    {{ form.description }}
+                </div>
+                <div class="mb-3 form-check">
+                    {{ form.is_active }}
+                    <label class="form-check-label" for="id_is_active">{{ form.is_active.label }}</label>
+                </div>
+
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">حفظ</button>
                     <a href="{% url 'product_list' %}" class="btn btn-secondary">إلغاء</a>
@@ -22,4 +81,72 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script>
+const skuInput = document.getElementById('id_sku');
+const barcodeInput = document.getElementById('id_barcode');
+const autoBarcode = document.getElementById('id_auto_barcode');
+const generateBtn = document.getElementById('generateBarcodeBtn');
+const previewSvg = document.getElementById('barcodePreview');
+const previewText = document.getElementById('barcodePreviewText');
+const excludePk = '{{ product.pk|default:"" }}';
+
+function updatePreview(code) {
+    previewText.textContent = code || '—';
+    if (!code) {
+        previewSvg.innerHTML = '';
+        return;
+    }
+    try {
+        JsBarcode(previewSvg, code, {
+            format: code.length === 13 && /^\d+$/.test(code) ? 'EAN13' : 'CODE128',
+            width: 1.8,
+            height: 60,
+            displayValue: true,
+            fontSize: 14,
+            margin: 8,
+        });
+    } catch (e) {
+        previewSvg.innerHTML = '';
+    }
+}
+
+async function generateBarcode() {
+    const sku = skuInput.value.trim();
+    if (!sku) {
+        alert('أدخل SKU أولاً');
+        skuInput.focus();
+        return;
+    }
+    generateBtn.disabled = true;
+    try {
+        const params = new URLSearchParams({ sku });
+        if (excludePk) params.append('exclude_pk', excludePk);
+        const res = await fetch(`{% url 'api_generate_barcode' %}?${params}`);
+        const data = await res.json();
+        barcodeInput.value = data.barcode;
+        autoBarcode.checked = false;
+        updatePreview(data.barcode);
+    } finally {
+        generateBtn.disabled = false;
+    }
+}
+
+generateBtn.addEventListener('click', generateBarcode);
+
+skuInput.addEventListener('blur', () => {
+    if (autoBarcode.checked && skuInput.value.trim() && !barcodeInput.value.trim()) {
+        generateBarcode();
+    }
+});
+
+barcodeInput.addEventListener('input', () => updatePreview(barcodeInput.value.trim()));
+
+if (barcodeInput.value.trim()) {
+    updatePreview(barcodeInput.value.trim());
+}
+</script>
 {% endblock %}

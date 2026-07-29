@@ -22,6 +22,7 @@ urlpatterns = [
     path('operations/out/', views.stock_out_view, name='stock_out'),
     path('operations/transfer/', views.transfer_view, name='transfer'),
     path('operations/scanner/', views.barcode_scanner, name='barcode_scanner'),
+    path('api/generate-barcode/', views.api_generate_barcode, name='api_generate_barcode'),
     path('api/product-by-barcode/', views.api_product_by_barcode, name='api_product_by_barcode'),
 
     path('movements/', views.movement_log, name='movement_log'),
