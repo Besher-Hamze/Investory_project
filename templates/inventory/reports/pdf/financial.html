@@ -1,0 +1,17 @@
+{% extends 'inventory/reports/pdf/base.html' %}
+{% block content %}
+<table>
+    <thead>
+        <tr><th>المستودع</th><th>القيمة</th></tr>
+    </thead>
+    <tbody>
+    {% for row in by_warehouse %}
+        <tr>
+            <td>{{ row.warehouse__name }}</td>
+            <td>{{ row.value|floatformat:2 }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p><strong>الإجمالي: {{ total_value|floatformat:2 }} ل.س</strong></p>
+{% endblock %}

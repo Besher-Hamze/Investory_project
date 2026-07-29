@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ warehouse.name }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2><i class="bi bi-building"></i> {{ warehouse.name }}</h2>
+        <p class="text-muted mb-0">{{ warehouse.address|default:"—" }}</p>
+    </div>
+    <a href="{% url 'warehouse_list' %}" class="btn btn-secondary">رجوع</a>
+</div>
+{% if low_stock %}
+<div class="alert alert-warning"><i class="bi bi-exclamation-triangle"></i> يوجد {{ low_stock.count }} منتج/منتجات تحت الحد الأدنى في هذا المستودع.</div>
+{% endif %}
+<div class="card table-card">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead><tr><th>المنتج</th><th>SKU</th><th>الكمية</th><th>الحد الأدنى</th><th>القيمة</th></tr></thead>
+            <tbody>
+            {% for s in stock_levels %}
+            <tr class="{% if s.quantity <= s.product.min_quantity %}table-warning{% endif %}">
+                <td>{{ s.product.name }}</td>
+                <td>{{ s.product.sku }}</td>
+                <td>{{ s.quantity }}</td>
+                <td>{{ s.product.min_quantity }}</td>
+                <td>{% widthratio s.quantity 1 s.product.price %} ل.س</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center text-muted py-4">لا يوجد مخزون في هذا المستودع</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

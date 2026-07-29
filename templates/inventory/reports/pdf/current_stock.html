@@ -1,0 +1,21 @@
+{% extends 'inventory/reports/pdf/base.html' %}
+{% block content %}
+<p>تاريخ التقرير: {% now "Y-m-d H:i" %}</p>
+<table>
+    <thead>
+        <tr><th>المستودع</th><th>المنتج</th><th>SKU</th><th>الكمية</th><th>السعر</th></tr>
+    </thead>
+    <tbody>
+    {% for s in stock_levels %}
+        <tr>
+            <td>{{ s.warehouse.name }}</td>
+            <td>{{ s.product.name }}</td>
+            <td>{{ s.product.sku }}</td>
+            <td>{{ s.quantity }}</td>
+            <td>{{ s.product.price|floatformat:2 }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p><strong>إجمالي القيمة: {{ total_value|floatformat:2 }} ل.س</strong></p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'inventory/reports/pdf/base.html' %}
+{% block content %}
+<p>الفترة: {{ days }} يوم</p>
+<table>
+    <thead>
+        <tr><th>المنتج</th><th>SKU</th><th>إجمالي الإخراج</th></tr>
+    </thead>
+    <tbody>
+    {% for row in outbound %}
+        <tr>
+            <td>{{ row.product__name }}</td>
+            <td>{{ row.product__sku }}</td>
+            <td>{{ row.total_out }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

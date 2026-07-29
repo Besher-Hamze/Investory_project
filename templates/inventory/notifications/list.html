@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}الإشعارات{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-bell"></i> الإشعارات</h2>
+    <form method="post" action="{% url 'notifications_mark_all_read' %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-primary btn-sm">تعليم الكل كمقروء</button>
+    </form>
+</div>
+<div class="list-group">
+{% for n in notifications %}
+    <div class="list-group-item {% if not n.is_read %}list-group-item-warning{% endif %}">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h6 class="mb-1">{{ n.title }}</h6>
+                <p class="mb-1 small">{{ n.message }}</p>
+                <small class="text-muted">{{ n.created_at|date:"Y-m-d H:i" }} | {{ n.get_notification_type_display }}</small>
+            </div>
+            {% if not n.is_read %}
+            <form method="post" action="{% url 'notification_mark_read' n.pk %}">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-outline-success">مقروء</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <div class="alert alert-info">لا توجد إشعارات</div>
+{% endfor %}
+</div>
+{% endblock %}

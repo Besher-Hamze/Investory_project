@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}المخزون المالي{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>تقرير المخزون المالي</h2>
+    <a href="{% url 'report_pdf' 'financial' %}" class="btn btn-outline-danger"><i class="bi bi-file-pdf"></i> PDF</a>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card p-3 text-center">
+            <div class="text-muted">إجمالي قيمة المخزون</div>
+            <div class="fs-3 fw-bold text-primary">{{ total_value|floatformat:2 }} ل.س</div>
+        </div>
+    </div>
+    {% for row in by_warehouse %}
+    <div class="col-md-4">
+        <div class="card stat-card p-3 text-center">
+            <div class="text-muted">{{ row.warehouse__name }}</div>
+            <div class="fs-5 fw-bold">{{ row.value|floatformat:2 }} ل.س</div>
+            <small class="text-muted">الكمية: {{ row.quantity }}</small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="card table-card">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead><tr><th>المستودع</th><th>المنتج</th><th>الكمية</th><th>سعر الوحدة</th><th>القيمة</th></tr></thead>
+            <tbody>
+            {% for s in stock_levels %}
+            {% if s.quantity > 0 %}
+            <tr>
+                <td>{{ s.warehouse.name }}</td>
+                <td>{{ s.product.name }}</td>
+                <td>{{ s.quantity }}</td>
+                <td>{{ s.product.price }}</td>
+                <td>{% widthratio s.quantity 1 s.product.price %} ل.س</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

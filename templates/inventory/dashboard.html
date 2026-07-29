@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}لوحة التحكم{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-speedometer2"></i> لوحة التحكم</h2>
+    <span class="text-muted">مرحباً، {{ user.get_full_name|default:user.username }}</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-box"></i></div>
+                <div>
+                    <div class="text-muted small">المنتجات</div>
+                    <div class="fs-4 fw-bold">{{ products_count }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-building"></i></div>
+                <div>
+                    <div class="text-muted small">المستودعات</div>
+                    <div class="fs-4 fw-bold">{{ warehouses_count }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="stat-icon bg-danger bg-opacity-10 text-danger"><i class="bi bi-exclamation-triangle"></i></div>
+                <div>
+                    <div class="text-muted small">مخزون منخفض</div>
+                    <div class="fs-4 fw-bold">{{ low_stock_count }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-currency-dollar"></i></div>
+                <div>
+                    <div class="text-muted small">قيمة المخزون</div>
+                    <div class="fs-5 fw-bold">{{ total_stock_value|floatformat:0 }} ل.س</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="card table-card p-3">
+            <h5 class="mb-3">إحصائيات الحركة (30 يوم)</h5>
+            <canvas id="movementChart" height="200"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card table-card p-3">
+            <h5 class="mb-3">الحركة اليومية</h5>
+            <canvas id="dailyChart" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card table-card">
+            <div class="card-header bg-white d-flex justify-content-between">
+                <h5 class="mb-0">آخر الحركات</h5>
+                <a href="{% url 'movement_log' %}" class="btn btn-sm btn-outline-primary">عرض الكل</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead><tr><th>التاريخ</th><th>المنتج</th><th>النوع</th><th>الكمية</th><th>المستخدم</th></tr></thead>
+                    <tbody>
+                    {% for m in recent_movements %}
+                    <tr>
+                        <td>{{ m.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>{{ m.product.name }}</td>
+                        <td><span class="badge bg-secondary">{{ m.get_movement_type_display }}</span></td>
+                        <td>{{ m.quantity }}</td>
+                        <td>{{ m.user.username|default:"—" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="text-center text-muted">لا توجد حركات</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card table-card">
+            <div class="card-header bg-white"><h5 class="mb-0 text-danger"><i class="bi bi-exclamation-triangle"></i> تنبيهات الحد الأدنى</h5></div>
+            <ul class="list-group list-group-flush">
+                {% for p in low_stock_products %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ p.name }} <small class="text-muted">({{ p.sku }})</small></span>
+                    <span class="badge bg-danger">{{ p.total|default:0 }} / {{ p.min_quantity }}</span>
+                </li>
+                {% empty %}
+                <li class="list-group-item text-muted text-center">لا توجد تنبيهات</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const movementCtx = document.getElementById('movementChart');
+new Chart(movementCtx, {
+    type: 'doughnut',
+    data: {
+        labels: {{ chart_labels_json|safe }},
+        datasets: [{ data: {{ chart_data_json|safe }}, backgroundColor: ['#0d6efd','#198754','#dc3545','#fd7e14','#6f42c1'] }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } } }
+});
+
+const dailyCtx = document.getElementById('dailyChart');
+new Chart(dailyCtx, {
+    type: 'line',
+    data: {
+        labels: {{ line_labels_json|safe }},
+        datasets: [{ label: 'عدد الحركات', data: {{ line_data_json|safe }}, borderColor: '#0d6efd', tension: 0.3, fill: false }]
+    },
+    options: { scales: { y: { beginAtZero: true } } }
+});
+</script>
+{% endblock %}

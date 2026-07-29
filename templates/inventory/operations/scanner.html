@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}ماسح الباركود{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-upc-scan"></i> ماسح الباركود</h2>
+    <a href="{% url 'stock_in' %}" class="btn btn-secondary">رجوع للإدخال</a>
+</div>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card form-card p-3">
+            <div id="scanner-container"></div>
+            <div class="text-center mt-2">
+                <button id="startScanner" class="btn btn-primary"><i class="bi bi-camera"></i> تشغيل الكاميرا</button>
+                <button id="stopScanner" class="btn btn-secondary d-none">إيقاف</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card form-card p-4">
+            <h5>نتيجة المسح</h5>
+            <div id="productInfo" class="text-muted">لم يتم مسح أي باركود بعد</div>
+            <hr>
+            <h6>إجراءات سريعة</h6>
+            <div class="d-grid gap-2">
+                <a id="linkStockIn" href="{% url 'stock_in' %}" class="btn btn-success btn-sm disabled">إدخال هذا المنتج</a>
+                <a id="linkBarcode" href="#" class="btn btn-outline-secondary btn-sm disabled">عرض الباركود</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+<script>
+let scannerActive = false;
+
+async function lookupBarcode(code) {
+    const res = await fetch(`{% url 'api_product_by_barcode' %}?barcode=${encodeURIComponent(code)}`);
+    const data = await res.json();
+    const info = document.getElementById('productInfo');
+    const linkIn = document.getElementById('linkStockIn');
+    const linkBarcode = document.getElementById('linkBarcode');
+    if (data.found) {
+        info.innerHTML = `<strong>${data.name}</strong><br>SKU: ${data.sku}<br>الباركود: ${data.barcode}<br>المخزون الكلي: ${data.total_quantity}<br>السعر: ${data.price} ل.س`;
+        linkIn.classList.remove('disabled');
+        linkIn.href = `{% url 'stock_in' %}?product=${data.id}`;
+        linkBarcode.classList.remove('disabled');
+        linkBarcode.href = `/products/${data.id}/barcode/`;
+    } else {
+        info.innerHTML = `<span class="text-danger">${data.message}: ${code}</span>`;
+        linkIn.classList.add('disabled');
+        linkBarcode.classList.add('disabled');
+    }
+}
+
+document.getElementById('startScanner').addEventListener('click', function() {
+    if (scannerActive) return;
+    Quagga.init({
+        inputStream: { name: 'Live', type: 'LiveStream', target: document.querySelector('#scanner-container'), constraints: { facingMode: 'environment' } },
+        decoder: { readers: ['code_128_reader', 'ean_reader', 'upc_reader'] },
+        locate: true
+    }, function(err) {
+        if (err) { alert('تعذر تشغيل الكاميرا: ' + err); return; }
+        Quagga.start();
+        scannerActive = true;
+        document.getElementById('startScanner').classList.add('d-none');
+        document.getElementById('stopScanner').classList.remove('d-none');
+    });
+    let lastCode = '';
+    Quagga.onDetected(function(result) {
+        const code = result.codeResult.code;
+        if (code === lastCode) return;
+        lastCode = code;
+        lookupBarcode(code);
+        setTimeout(() => { lastCode = ''; }, 2000);
+    });
+});
+
+document.getElementById('stopScanner').addEventListener('click', function() {
+    Quagga.stop();
+    scannerActive = false;
+    document.getElementById('startScanner').classList.remove('d-none');
+    document.getElementById('stopScanner').classList.add('d-none');
+});
+</script>
+{% endblock %}

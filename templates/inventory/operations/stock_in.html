@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}إدخال مخزون{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card form-card p-4">
+            <h3 class="mb-4"><i class="bi bi-box-arrow-in-down"></i> عملية إدخال</h3>
+            <form method="post" id="stockInForm">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">تنفيذ الإدخال</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card form-card p-4">
+            <h5>مسح باركود سريع</h5>
+            <input type="text" id="barcodeInput" class="form-control mb-2" placeholder="امسح الباركود هنا">
+            <div id="scanResult" class="small text-muted">امسح الباركود لاختيار المنتج تلقائياً</div>
+            <a href="{% url 'barcode_scanner' %}" class="btn btn-outline-primary btn-sm mt-2"><i class="bi bi-camera"></i> فتح الماسح بالكاميرا</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+const barcodeInput = document.getElementById('barcodeInput');
+const productSelect = document.getElementById('id_product');
+const scanResult = document.getElementById('scanResult');
+
+barcodeInput.addEventListener('change', async function() {
+    const code = this.value.trim();
+    if (!code) return;
+    const res = await fetch(`{% url 'api_product_by_barcode' %}?barcode=${encodeURIComponent(code)}`);
+    const data = await res.json();
+    if (data.found) {
+        productSelect.value = data.id;
+        scanResult.innerHTML = `<span class="text-success">✓ ${data.name} - المخزون: ${data.total_quantity}</span>`;
+    } else {
+        scanResult.innerHTML = `<span class="text-danger">${data.message}</span>`;
+    }
+    this.value = '';
+    this.focus();
+});
+</script>
+{% endblock %}
