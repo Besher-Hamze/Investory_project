@@ -12,15 +12,70 @@
         <option value="90" {% if days == 90 %}selected{% endif %}>90 يوم</option>
     </select>
 </form>
+
+{% if expired_stock %}
+<div class="alert alert-danger">
+    <i class="bi bi-exclamation-octagon"></i>
+    <strong>تنبيه:</strong> يوجد {{ expired_stock|length }} مادة/مواد منتهية الصلاحية — يجب الإتلاف فوراً عبر «إتلاف منتهي الصلاحية».
+</div>
+<h5 class="text-danger mb-3">مواد منتهية الصلاحية (يجب الإتلاف)</h5>
+<div class="card table-card mb-4">
+    <div class="table-responsive">
+        <table class="table table-danger table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>المنتج</th><th>المستودع</th><th>الكمية</th>
+                    <th>تاريخ الإدخال</th><th>تاريخ الفاعلية</th><th>تاريخ الصلاحية</th><th>الحالة</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for s in expired_stock %}
+            <tr>
+                <td>{{ s.product.name }} <small class="text-muted">({{ s.product.sku }})</small></td>
+                <td>{{ s.warehouse.name }}</td>
+                <td>{{ s.quantity }}</td>
+                <td>{{ s.entry_date|default:"—" }}</td>
+                <td>{{ s.effective_date|default:"—" }}</td>
+                <td>{{ s.expiry_date }}</td>
+                <td><span class="badge bg-danger">{{ s.expiry_status_label }}</span></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<h5 class="mb-3">مواد بطيئة الحركة (بدون حركة خلال {{ days }} يوم)</h5>
 <div class="card table-card">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
-            <thead><tr><th>المنتج</th><th>SKU</th><th>الكمية الحالية</th><th>الحد الأدنى</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>المنتج</th><th>SKU</th><th>المستودع</th><th>الكمية</th>
+                    <th>تاريخ الإدخال</th><th>تاريخ الفاعلية</th><th>تاريخ الصلاحية</th>
+                    <th>أيام متبقية</th><th>الحالة</th>
+                </tr>
+            </thead>
             <tbody>
-            {% for p in slow_products %}
-            <tr><td>{{ p.name }}</td><td>{{ p.sku }}</td><td>{{ p.total|default:0 }}</td><td>{{ p.min_quantity }}</td></tr>
+            {% for s in slow_stock %}
+            <tr class="{% if s.expiry_status == 'expired' %}table-danger{% elif s.expiry_status == 'expiring_soon' %}table-warning{% endif %}">
+                <td>{{ s.product.name }}</td>
+                <td>{{ s.product.sku }}</td>
+                <td>{{ s.warehouse.name }}</td>
+                <td>{{ s.quantity }}</td>
+                <td>{{ s.entry_date|default:"—" }}</td>
+                <td>{{ s.effective_date|default:"—" }}</td>
+                <td>{{ s.expiry_date|default:"—" }}</td>
+                <td>
+                    {% if s.days_until_expiry != None %}
+                        {{ s.days_until_expiry }} يوم
+                    {% else %}—{% endif %}
+                </td>
+                <td><span class="badge {% if s.expiry_status == 'expired' %}bg-danger{% elif s.expiry_status == 'expiring_soon' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">{{ s.expiry_status_label }}</span></td>
+            </tr>
             {% empty %}
-            <tr><td colspan="4" class="text-center text-muted">جميع المنتجات نشطة خلال هذه الفترة</td></tr>
+            <tr><td colspan="9" class="text-center text-muted">جميع المنتجات نشطة خلال هذه الفترة</td></tr>
             {% endfor %}
             </tbody>
         </table>

@@ -1,0 +1,834 @@
+<mxfile host="app.diagrams.net" agent="Investory Thesis Generator" pages="11">
+  <diagram id="d685693f-4851-4c36-91ad-7b7918d3a544" name="1 - Use Case | حالات الاستخدام">
+    <mxGraphModel dx="1188" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="actor_admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="مدير المخزون" vertex="1">
+          <mxGeometry height="80" width="40" x="80" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="uc1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="تسجيل الدخول" vertex="1">
+          <mxGeometry height="60" width="170" x="410" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="إدارة المنتجات" vertex="1">
+          <mxGeometry height="60" width="170" x="420" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="إدارة المستودعات" vertex="1">
+          <mxGeometry height="60" width="170" x="420" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="إدخال مخزون (شراء / استلام)" vertex="1">
+          <mxGeometry height="60" width="170" x="420" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="إخراج مخزون (بيع / صرف)" vertex="1">
+          <mxGeometry height="60" width="170" x="650" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="نقل بين مستودعات" vertex="1">
+          <mxGeometry height="60" width="170" x="420" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="مسح الباركود" vertex="1">
+          <mxGeometry height="60" width="170" x="650" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="uc8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="طباعة الباركود" vertex="1">
+          <mxGeometry height="60" width="170" x="650" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="عرض سجل الحركة" vertex="1">
+          <mxGeometry height="60" width="170" x="400" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="uc10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="استلام التنبيهات" vertex="1">
+          <mxGeometry height="60" width="170" x="650" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="uc11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="عرض التقارير" vertex="1">
+          <mxGeometry height="60" width="170" x="370" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="uc12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="تصدير PDF" vertex="1">
+          <mxGeometry height="60" width="170" x="650" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc1" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc2" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc3" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc4" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc5" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc6" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc7" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc8" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc9" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc10" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc11" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uc12" edge="1" parent="1" source="actor_admin" style="endArrow=classic;html=1;rounded=0;" target="uc12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_email" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="البريد الإلكتروني" vertex="1">
+          <mxGeometry height="80" width="40" x="900" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="e_email" edge="1" parent="1" source="uc10" style="endArrow=classic;html=1;dashed=1;" target="actor_email">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;" value="مشروع ماجستير MCS الجامعة الافتراضية السورية" vertex="1">
+          <mxGeometry height="40" width="260" x="80" y="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="99769035-8a99-421d-b88c-235594f3ae45" name="2 - ER Diagram | مخطط قاعدة البيانات">
+    <mxGraphModel dx="543" dy="383" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="er_User" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="User" vertex="1">
+          <mxGeometry height="126" width="220" x="40" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="er_User_0" parent="er_User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_User_1" parent="er_User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="username" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_User_2" parent="er_User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="email" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_User_3" parent="er_User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="password" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="Product" vertex="1">
+          <mxGeometry height="222" width="220" x="340" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_0" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_1" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="name" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_2" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="SKU (unique)" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_3" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="barcode (unique)" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_4" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="price" vertex="1">
+          <mxGeometry height="24" width="220" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_5" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="min_quantity" vertex="1">
+          <mxGeometry height="24" width="220" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_6" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="shelf" vertex="1">
+          <mxGeometry height="24" width="220" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Product_7" parent="er_Product" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="rack_number" vertex="1">
+          <mxGeometry height="24" width="220" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="Warehouse" vertex="1">
+          <mxGeometry height="174" width="220" x="630" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_0" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_1" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="name" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_2" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="code (unique)" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_3" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="address" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_4" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="is_main" vertex="1">
+          <mxGeometry height="24" width="220" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Warehouse_5" parent="er_Warehouse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="is_active" vertex="1">
+          <mxGeometry height="24" width="220" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="StockLevel" vertex="1">
+          <mxGeometry height="150" width="220" x="380" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel_0" parent="er_StockLevel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel_1" parent="er_StockLevel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK product_id" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel_2" parent="er_StockLevel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK warehouse_id" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel_3" parent="er_StockLevel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="quantity" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockLevel_4" parent="er_StockLevel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="UNIQUE(product, warehouse)" vertex="1">
+          <mxGeometry height="24" width="220" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="StockMovement" vertex="1">
+          <mxGeometry height="294" width="220" x="40" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_0" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_1" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK product_id" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_2" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="movement_type" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_3" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK warehouse_id" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_4" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK warehouse_from" vertex="1">
+          <mxGeometry height="24" width="220" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_5" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK warehouse_to" vertex="1">
+          <mxGeometry height="24" width="220" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_6" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="quantity" vertex="1">
+          <mxGeometry height="24" width="220" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_7" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="quantity_before" vertex="1">
+          <mxGeometry height="24" width="220" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_8" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="quantity_after" vertex="1">
+          <mxGeometry height="24" width="220" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_9" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK user_id" vertex="1">
+          <mxGeometry height="24" width="220" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="er_StockMovement_10" parent="er_StockMovement" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="created_at" vertex="1">
+          <mxGeometry height="24" width="220" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;" value="Notification" vertex="1">
+          <mxGeometry height="198" width="220" x="770" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_0" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="PK id" vertex="1">
+          <mxGeometry height="24" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_1" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK user_id" vertex="1">
+          <mxGeometry height="24" width="220" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_2" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="FK product_id" vertex="1">
+          <mxGeometry height="24" width="220" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_3" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="title" vertex="1">
+          <mxGeometry height="24" width="220" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_4" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="message" vertex="1">
+          <mxGeometry height="24" width="220" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_5" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="notification_type" vertex="1">
+          <mxGeometry height="24" width="220" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="er_Notification_6" parent="er_Notification" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="is_read" vertex="1">
+          <mxGeometry height="24" width="220" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0" edge="1" parent="1" source="er_Product" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_StockLevel" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="480" />
+              <mxPoint x="430" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel1" edge="1" parent="1" source="er_Warehouse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_StockLevel" value="1:N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2" edge="1" parent="1" source="er_Product" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_StockMovement" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel3" edge="1" parent="1" source="er_User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_StockMovement" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="300" />
+              <mxPoint x="110" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel4" edge="1" parent="1" source="er_User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_Notification" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="30" />
+              <mxPoint x="880" y="30" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel5" edge="1" parent="1" source="er_Product" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;" target="er_Notification" value="1:N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="8c99a724-a387-43ea-8f90-d0b8913b1f64" name="3 - Architecture | المعمارية">
+    <mxGraphModel dx="1583" dy="1117" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="layer_ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;spacingTop=8;" value="Presentation Layer طبقة العرض" vertex="1">
+          <mxGeometry height="150" width="920" x="120" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ui0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="HTML5 / CSS3" vertex="1">
+          <mxGeometry height="50" width="130" x="150" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Bootstrap 5 RTL" vertex="1">
+          <mxGeometry height="50" width="130" x="295" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="JavaScript" vertex="1">
+          <mxGeometry height="50" width="130" x="440" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="JsBarcode" vertex="1">
+          <mxGeometry height="50" width="130" x="585" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="QuaggaJS" vertex="1">
+          <mxGeometry height="50" width="130" x="730" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Chart.js" vertex="1">
+          <mxGeometry height="50" width="130" x="875" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_app" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;spacingTop=8;" value="Application Layer طبقة التطبيق (Django)" vertex="1">
+          <mxGeometry height="170" width="920" x="120" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="app0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Views" vertex="1">
+          <mxGeometry height="50" width="130" x="150" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="app1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Forms" vertex="1">
+          <mxGeometry height="50" width="130" x="295" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="app2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Services" vertex="1">
+          <mxGeometry height="50" width="130" x="440" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="app3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="PDF Utils" vertex="1">
+          <mxGeometry height="50" width="130" x="585" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="app4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Barcode Utils" vertex="1">
+          <mxGeometry height="50" width="130" x="730" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="app5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" value="Context Processors" vertex="1">
+          <mxGeometry height="50" width="130" x="875" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_data" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;spacingTop=8;" value="Data Layer طبقة البيانات" vertex="1">
+          <mxGeometry height="130" width="920" x="120" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" value="PostgreSQL (investory_db)" vertex="1">
+          <mxGeometry height="70" width="160" x="460" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="layer_ui" style="endArrow=classic;html=1;rounded=0;" target="layer_app">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="layer_app" style="endArrow=classic;html=1;rounded=0;" target="layer_data" value="ORM">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=16;fontStyle=1;" value="Investory - System Architecture" vertex="1">
+          <mxGeometry height="30" width="420" x="360" y="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="164af517-64d0-402b-aae5-0537cc861fe6" name="4 - DFD Level 0 | تدفق البيانات - مستوى 0">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="p0" parent="1" value="0 نظام إدارة المستودعات" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1">
+          <mxGeometry x="420" y="280" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" value="مدير المخزون" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1">
+          <mxGeometry x="80" y="300" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" value="ماسح الباركود" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1">
+          <mxGeometry x="80" y="450" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" value="البريد الإلكتروني" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1">
+          <mxGeometry x="820" y="300" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" value="D1: PostgreSQL" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="430" y="500" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" parent="1" value="بيانات المنتجات / العمليات" style="endArrow=classic;html=1;rounded=0;" edge="1" source="e1" target="p0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" parent="1" value="نتائج / تقارير" style="endArrow=classic;html=1;rounded=0;" edge="1" source="p0" target="e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" parent="1" value="رمز الباركود" style="endArrow=classic;html=1;rounded=0;" edge="1" source="e2" target="p0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" parent="1" value="تنبيهات" style="endArrow=classic;html=1;rounded=0;" edge="1" source="p0" target="e3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" parent="1" value="حفظ / قراءة" style="endArrow=classic;html=1;rounded=0;" edge="1" source="p0" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="b30fcea9-48cf-429f-b10c-44a22c6a9879" name="5 - DFD Level 1 | تدفق البيانات - مستوى 1">
+    <mxGraphModel dx="950" dy="670" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mgr" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="مدير المخزون" vertex="1">
+          <mxGeometry height="50" width="120" x="40" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="1 إدارة المنتجات" vertex="1">
+          <mxGeometry height="80" width="120" x="80" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="2 إدارة المستودعات" vertex="1">
+          <mxGeometry height="80" width="120" x="220" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="3 عمليات الإدخال/الإخراج" vertex="1">
+          <mxGeometry height="80" width="120" x="320" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="4 الباركود والمسح" vertex="1">
+          <mxGeometry height="80" width="120" x="390" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="5 التقارير والتنبيهات" vertex="1">
+          <mxGeometry height="80" width="120" x="400" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="6 المصادقة والصلاحيات" vertex="1">
+          <mxGeometry height="80" width="120" x="360" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Products" vertex="1">
+          <mxGeometry height="40" width="110" x="240" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Warehouses" vertex="1">
+          <mxGeometry height="40" width="110" x="380" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="StockLevels" vertex="1">
+          <mxGeometry height="40" width="110" x="520" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Movements" vertex="1">
+          <mxGeometry height="40" width="110" x="660" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Notifications" vertex="1">
+          <mxGeometry height="40" width="110" x="800" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="lm0" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lm1" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lm2" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lm3" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lm4" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lm5" edge="1" parent="1" source="mgr" style="endArrow=classic;html=1;rounded=0;" target="p6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="d38fe7d4-57c5-4034-9a21-ef8eaab75234" name="6 - Activity Stock In | نشاط الإدخال">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" parent="1" value="بداية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;fontColor=#ffffff;" vertex="1">
+          <mxGeometry x="340" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" value="تسجيل الدخول للنظام" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="110" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" parent="1" style="endArrow=classic;html=1;" edge="1" source="start" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" value="فتح صفحة إدخال مخزون" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="200" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" style="endArrow=classic;html=1;" edge="1" source="a0" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" value="اختيار المنتج والمستودع" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="endArrow=classic;html=1;" edge="1" source="a1" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" value="اختيار نوع العملية (فاتورة شراء / أمر استلام)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="380" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" style="endArrow=classic;html=1;" edge="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" value="مسح الباركود؟" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="280" y="470" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="endArrow=classic;html=1;" edge="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" parent="1" value="إدخال الكمية ورقم المرجع" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="580" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="1" style="endArrow=classic;html=1;" edge="1" source="a4" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" parent="1" value="التحقق من صحة البيانات" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="280" y="670" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" parent="1" style="endArrow=classic;html=1;" edge="1" source="a5" target="a6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" parent="1" value="تحديث StockLevel + تسجيل StockMovement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="780" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="1" style="endArrow=classic;html=1;" edge="1" source="a6" target="a7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" parent="1" value="فحص الحد الأدنى وإرسال تنبيه إن لزم" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="870" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" parent="1" style="endArrow=classic;html=1;" edge="1" source="a7" target="a8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" value="نهاية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1">
+          <mxGeometry x="340" y="960" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end_e" parent="1" style="endArrow=classic;html=1;" edge="1" source="a8" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="78b2deaa-2c61-4a5b-8288-d367315546d7" name="7 - Activity Sale | نشاط البيع">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" parent="1" value="بداية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;fontColor=#ffffff;" vertex="1">
+          <mxGeometry x="340" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" value="تسجيل الدخول للنظام" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="110" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" parent="1" style="endArrow=classic;html=1;" edge="1" source="start" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" value="فتح صفحة إخراج مخزون" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="200" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" style="endArrow=classic;html=1;" edge="1" source="a0" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" value="اختيار المنتج والمستودع" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="endArrow=classic;html=1;" edge="1" source="a1" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" value="اختيار فاتورة بيع أو أمر صرف" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="380" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" style="endArrow=classic;html=1;" edge="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" value="التحقق: الكمية متوفرة في المستودع المختار؟" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="280" y="470" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="endArrow=classic;html=1;" edge="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" parent="1" value="خصم الكمية من StockLevel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="580" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="1" style="endArrow=classic;html=1;" edge="1" source="a4" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" parent="1" value="تسجيل الحركة في Audit Log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="670" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" parent="1" style="endArrow=classic;html=1;" edge="1" source="a5" target="a6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" parent="1" value="فحص الحد الأدنى للمخزون" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="760" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="1" style="endArrow=classic;html=1;" edge="1" source="a6" target="a7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" value="نهاية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1">
+          <mxGeometry x="340" y="850" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end_e" parent="1" style="endArrow=classic;html=1;" edge="1" source="a7" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="97949efa-2f56-444f-b899-4a98923c1cdb" name="8 - Activity Transfer | نشاط النقل">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" parent="1" value="بداية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;fontColor=#ffffff;" vertex="1">
+          <mxGeometry x="340" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" value="اختيار المنتج" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="110" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" parent="1" style="endArrow=classic;html=1;" edge="1" source="start" target="a0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" value="تحديد المستودع المصدر والمستودع الهدف" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="200" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" style="endArrow=classic;html=1;" edge="1" source="a0" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" value="المستودعان مختلفان؟" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="280" y="290" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="endArrow=classic;html=1;" edge="1" source="a1" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" value="الكمية متوفرة في المصدر؟" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1">
+          <mxGeometry x="280" y="400" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" style="endArrow=classic;html=1;" edge="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" value="خصم من المصدر + إضافة للهدف" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="510" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="endArrow=classic;html=1;" edge="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" parent="1" value="تسجيل حركة TRANSFER في سجل الحركة" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="280" y="600" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="1" style="endArrow=classic;html=1;" edge="1" source="a4" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" value="نهاية" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1">
+          <mxGeometry x="340" y="690" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end_e" parent="1" style="endArrow=classic;html=1;" edge="1" source="a5" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="5825f5a4-c091-4cac-b44e-58eebd38dc01" name="9 - Sequence Barcode | تسلسل مسح الباركود">
+    <mxGraphModel dx="1188" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="المستخدم" vertex="1">
+          <mxGeometry height="200" width="100" x="80" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" value="المتصفح (JsBarcode/Quagga)" vertex="1">
+          <mxGeometry height="200" width="200" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" value="Django Views" vertex="1">
+          <mxGeometry height="200" width="210" x="570" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="s" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" value="Services" vertex="1">
+          <mxGeometry height="200" width="100" x="840" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" value="PostgreSQL" vertex="1">
+          <mxGeometry height="200" width="100" x="1090" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" edge="1" parent="1" source="u" style="endArrow=block;html=1;rounded=0;" target="b" value="1. مسح الباركود">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" edge="1" parent="1" source="b" style="endArrow=block;html=1;rounded=0;" target="v" value="2. GET /api/product-by-barcode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" edge="1" parent="1" source="v" style="endArrow=block;html=1;rounded=0;" target="s" value="3. get_product_by_barcode()">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" edge="1" parent="1" source="s" style="endArrow=block;html=1;rounded=0;" target="db" value="4. SELECT Product">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" edge="1" parent="1" source="db" style="endArrow=block;html=1;rounded=0;" target="u" value="5. بيانات المنتج + المخزون">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" edge="1" parent="1" source="u" style="endArrow=block;html=1;rounded=0;" target="v" value="6. تنفيذ إدخال/إخراج">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="260" />
+              <mxPoint x="440" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" edge="1" parent="1" source="v" style="endArrow=block;html=1;rounded=0;" target="s" value="7. stock_in / stock_out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" edge="1" parent="1" source="s" style="endArrow=block;html=1;rounded=0;" target="db" value="8. UPDATE + INSERT Movement">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="2483b773-3c58-4c00-bda7-dede6f71044a" name="10 - Class Diagram | مخطط الفئات">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cl_Product" parent="1" value="Product" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="60" y="60" width="240" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_0" parent="cl_Product" value="- name: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="26" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_1" parent="cl_Product" value="- sku: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="48" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_2" parent="cl_Product" value="- barcode: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="70" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_3" parent="cl_Product" value="- price: Decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="92" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_4" parent="cl_Product" value="- min_quantity: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="114" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_5" parent="cl_Product" value="+ total_quantity()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="136" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Product_6" parent="cl_Product" value="+ is_low_stock()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="158" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Warehouse" parent="1" value="Warehouse" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="60" y="320" width="240" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Warehouse_0" parent="cl_Warehouse" value="- name: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="26" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Warehouse_1" parent="cl_Warehouse" value="- code: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="48" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Warehouse_2" parent="cl_Warehouse" value="- is_main: bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="70" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_Warehouse_3" parent="cl_Warehouse" value="+ total_quantity()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="92" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockLevel" parent="1" value="StockLevel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="360" y="190" width="240" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockLevel_0" parent="cl_StockLevel" value="- product: FK" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="26" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockLevel_1" parent="cl_StockLevel" value="- warehouse: FK" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="48" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockLevel_2" parent="cl_StockLevel" value="- quantity: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="70" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement" parent="1" value="StockMovement" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="360" y="420" width="240" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement_0" parent="cl_StockMovement" value="- movement_type: str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="26" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement_1" parent="cl_StockMovement" value="- quantity: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="48" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement_2" parent="cl_StockMovement" value="- quantity_before: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="70" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement_3" parent="cl_StockMovement" value="- quantity_after: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="92" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockMovement_4" parent="cl_StockMovement" value="- user: FK" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="114" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockService" parent="1" value="StockService" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1">
+          <mxGeometry x="680" y="190" width="240" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockService_0" parent="cl_StockService" value="+ stock_in()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="26" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockService_1" parent="cl_StockService" value="+ stock_out()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="48" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockService_2" parent="cl_StockService" value="+ transfer_stock()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="70" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cl_StockService_3" parent="cl_StockService" value="+ check_low_stock()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry x="0" y="92" width="240" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="cr0" parent="1" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;" edge="1" source="cl_Product" target="cl_StockLevel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cr1" parent="1" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;" edge="1" source="cl_Warehouse" target="cl_StockLevel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cr2" parent="1" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;" edge="1" source="cl_StockService" target="cl_StockMovement">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="a15b4474-156a-4ff9-be4e-2b04d4646793" name="11 - Gantt | البرنامج الزمني">
+    <mxGraphModel dx="1188" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=16;fontStyle=1;" value="البرنامج الزمني - 4 أشهر" vertex="1">
+          <mxGeometry height="30" width="300" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;" value="الشهر 1" vertex="1">
+          <mxGeometry height="24" width="140" x="280" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;" value="الشهر 2" vertex="1">
+          <mxGeometry height="24" width="140" x="440" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;" value="الشهر 3" vertex="1">
+          <mxGeometry height="24" width="140" x="600" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontStyle=1;" value="الشهر 4" vertex="1">
+          <mxGeometry height="24" width="140" x="760" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t_req" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تحليل المتطلبات" vertex="1">
+          <mxGeometry height="36" width="160" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="تصميم قاعدة البيانات" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تصميم قاعدة البيانات" vertex="1">
+          <mxGeometry height="36" width="160" x="80" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="تطوير الواجهة الخلفية" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تطوير Backend (Django)" vertex="1">
+          <mxGeometry height="36" width="240" x="80" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="تطوير الواجهات" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تطوير واجهات المستخدم" vertex="1">
+          <mxGeometry height="36" width="320" x="280" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="نظام الباركود" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="نظام الباركود" vertex="1">
+          <mxGeometry height="36" width="200" x="280" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="التقارير والتنبيهات" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="التقارير والتنبيهات" vertex="1">
+          <mxGeometry height="36" width="200" x="480" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="الاختبار" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="الاختبار وإصلاح الأخطاء" vertex="1">
+          <mxGeometry height="36" width="160" x="480" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="التوثيق" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="التوثيق والتسليم" vertex="1">
+          <mxGeometry height="36" width="160" x="640" y="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

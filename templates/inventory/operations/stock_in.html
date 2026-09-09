@@ -8,21 +8,40 @@
             <form method="post" id="stockInForm">
                 {% csrf_token %}
                 {% for field in form %}
+                {% if field.name == 'entry_date' or field.name == 'effective_date' or field.name == 'expiry_date' %}
+                {% if field.name == 'entry_date' %}<hr><h6 class="text-primary"><i class="bi bi-calendar-event"></i> تواريخ المادة (مهمة للصلاحية وبطيء الحركة)</h6>{% endif %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label }}{% if field.name == 'expiry_date' %} <span class="text-danger">*</span> {% endif %}</label>
+                    {{ field }}
+                    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+                    {% if field.errors %}<div class="text-danger small">{{ field.errors.0 }}</div>{% endif %}
+                </div>
+                {% else %}
                 <div class="mb-3">
                     <label class="form-label">{{ field.label }}</label>
                     {{ field }}
+                    {% if field.errors %}<div class="text-danger small">{{ field.errors.0 }}</div>{% endif %}
                 </div>
+                {% endif %}
                 {% endfor %}
                 <button type="submit" class="btn btn-success">تنفيذ الإدخال</button>
             </form>
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="card form-card p-4">
+        <div class="card form-card p-4 mb-3">
             <h5>مسح باركود سريع</h5>
             <input type="text" id="barcodeInput" class="form-control mb-2" placeholder="امسح الباركود هنا">
             <div id="scanResult" class="small text-muted">امسح الباركود لاختيار المنتج تلقائياً</div>
             <a href="{% url 'barcode_scanner' %}" class="btn btn-outline-primary btn-sm mt-2"><i class="bi bi-camera"></i> فتح الماسح بالكاميرا</a>
+        </div>
+        <div class="card form-card p-3 border-warning">
+            <h6 class="text-warning"><i class="bi bi-info-circle"></i> ملاحظة</h6>
+            <ul class="small mb-0">
+                <li><strong>تاريخ الإدخال:</strong> متى دخلت المادة للمستودع</li>
+                <li><strong>تاريخ الفاعلية:</strong> متى تصبح صالحة للبيع</li>
+                <li><strong>تاريخ الصلاحية:</strong> آخر يوم للاستخدام — عند انتهائه استخدم «إتلاف منتهي الصلاحية»</li>
+            </ul>
         </div>
     </div>
 </div>

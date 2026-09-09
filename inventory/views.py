@@ -66,6 +66,14 @@ def dashboard(request):
         total=Sum('stock_levels__quantity')
     ).filter(total__lte=F('min_quantity'))[:8]
 
+    today = timezone.localdate()
+    expiry_alert_stock = StockLevel.objects.filter(
+        quantity__gt=0,
+        expiry_date__isnull=False,
+    ).select_related('product', 'warehouse').order_by('expiry_date')
+    expired_stock = [s for s in expiry_alert_stock if s.expiry_status == 'expired'][:8]
+    expiring_soon_stock = [s for s in expiry_alert_stock if s.expiry_status == 'expiring_soon'][:8]
+
     thirty_days_ago = timezone.now() - timedelta(days=30)
     movement_stats = (
         StockMovement.objects.filter(created_at__gte=thirty_days_ago)
@@ -93,6 +101,8 @@ def dashboard(request):
         'total_stock_value': total_stock_value,
         'recent_movements': recent_movements,
         'low_stock_products': low_stock_products,
+        'expired_stock': expired_stock,
+        'expiring_soon_stock': expiring_soon_stock,
         'chart_labels_json': json.dumps(chart_labels, ensure_ascii=False),
         'chart_data_json': json.dumps(chart_data),
         'line_labels_json': json.dumps(line_labels, ensure_ascii=False),
@@ -200,6 +210,9 @@ def stock_in_view(request):
                 user=request.user,
                 reference_number=form.cleaned_data.get('reference_number', ''),
                 notes=form.cleaned_data.get('notes', ''),
+                entry_date=form.cleaned_data['entry_date'],
+                expiry_date=form.cleaned_data.get('expiry_date'),
+                effective_date=form.cleaned_data['effective_date'],
             )
             messages.success(request, 'تمت عملية الإدخال بنجاح.')
             return redirect('movement_log')
@@ -365,21 +378,39 @@ def report_slow_moving(request):
     days = int(request.GET.get('days', 60))
     since = timezone.now() - timedelta(days=days)
     active_product_ids = StockMovement.objects.filter(created_at__gte=since).values_list('product_id', flat=True).distinct()
-    slow_products = Product.objects.filter(is_active=True).exclude(id__in=active_product_ids).annotate(
-        total=Sum('stock_levels__quantity')
-    ).filter(total__gt=0)
-    return render(request, 'inventory/reports/slow_moving.html', {'slow_products': slow_products, 'days': days})
+    slow_stock = (
+        StockLevel.objects.filter(quantity__gt=0, product__is_active=True)
+        .exclude(product_id__in=active_product_ids)
+        .select_related('product', 'warehouse')
+        .order_by('expiry_date', 'entry_date')
+    )
+    today = timezone.localdate()
+    expired_stock = StockLevel.objects.filter(
+        quantity__gt=0, expiry_date__lt=today,
+    ).select_related('product', 'warehouse').order_by('expiry_date')
+    return render(request, 'inventory/reports/slow_moving.html', {
+        'slow_stock': slow_stock,
+        'expired_stock': expired_stock,
+        'days': days,
+        'today': today,
+    })
 
 
 @login_required
 def report_financial(request):
-    stock_levels = StockLevel.objects.select_related('product', 'warehouse')
+    stock_levels = StockLevel.objects.select_related('product', 'warehouse').filter(quantity__gt=0)
     by_warehouse = stock_value_by_warehouse(stock_levels)
     total_value = aggregate_stock_value(stock_levels)
+    financial_movements = (
+        StockMovement.objects.select_related('product', 'warehouse', 'user', 'warehouse_from', 'warehouse_to')
+        .order_by('-created_at')[:150]
+    )
     return render(request, 'inventory/reports/financial.html', {
         'by_warehouse': by_warehouse,
         'total_value': total_value,
         'stock_levels': stock_levels,
+        'financial_movements': financial_movements,
+        'report_generated_at': timezone.now(),
     })
 
 
@@ -425,10 +456,14 @@ def report_pdf(request, report_type):
         context = {'outbound': outbound, 'days': days}
         filename = 'turnover.pdf'
     elif report_type == 'financial':
-        stock_levels = StockLevel.objects.select_related('product', 'warehouse')
+        stock_levels = StockLevel.objects.select_related('product', 'warehouse').filter(quantity__gt=0)
         context = {
             'by_warehouse': stock_value_by_warehouse(stock_levels),
             'total_value': aggregate_stock_value(stock_levels),
+            'financial_movements': StockMovement.objects.select_related(
+                'product', 'warehouse', 'user',
+            ).order_by('-created_at')[:80],
+            'report_generated_at': timezone.now(),
         }
         filename = 'financial.pdf'
     elif report_type == 'slow_moving':
@@ -437,10 +472,19 @@ def report_pdf(request, report_type):
         active_product_ids = StockMovement.objects.filter(
             created_at__gte=since,
         ).values_list('product_id', flat=True).distinct()
-        slow_products = Product.objects.filter(is_active=True).exclude(
-            id__in=active_product_ids,
-        ).annotate(total=Sum('stock_levels__quantity')).filter(total__gt=0)
-        context = {'slow_products': slow_products, 'days': days}
+        slow_stock = (
+            StockLevel.objects.filter(quantity__gt=0, product__is_active=True)
+            .exclude(product_id__in=active_product_ids)
+            .select_related('product', 'warehouse')
+            .order_by('expiry_date')
+        )
+        context = {
+            'slow_stock': slow_stock,
+            'expired_stock': StockLevel.objects.filter(
+                quantity__gt=0, expiry_date__lt=timezone.localdate(),
+            ).select_related('product', 'warehouse'),
+            'days': days,
+        }
         filename = 'slow_moving.pdf'
     else:
         messages.error(request, 'نوع التقرير غير موجود.')

@@ -1,14 +1,16 @@
+from datetime import timedelta
 from decimal import Decimal
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from inventory.models import MovementType, Product, Warehouse
 from inventory.services import stock_in, stock_out, transfer_stock
 
 
 class Command(BaseCommand):
-    help = 'إنشاء بيانات تجريبية للمشروع'
+    help = 'Create demo data for the project'
 
     def handle(self, *args, **options):
         user, created = User.objects.get_or_create(
@@ -18,7 +20,7 @@ class Command(BaseCommand):
         if created:
             user.set_password('admin123')
             user.save()
-            self.stdout.write(self.style.SUCCESS('تم إنشاء المستخدم admin / admin123'))
+            self.stdout.write(self.style.SUCCESS('Created user admin / admin123'))
 
         wh1, _ = Warehouse.objects.get_or_create(
             code='WH1',
@@ -52,15 +54,40 @@ class Command(BaseCommand):
             )
 
         if not user.stock_movements.exists():
+            today = timezone.localdate()
             products = list(Product.objects.all())
-            stock_in(products[0], wh1, 50, MovementType.IN_PURCHASE, user, 'PO-001')
-            stock_in(products[1], wh1, 30, MovementType.IN_RECEIPT, user, 'RC-001')
-            stock_in(products[2], wh2, 20, MovementType.IN_PURCHASE, user, 'PO-002')
-            stock_in(products[3], wh1, 5, MovementType.IN_PURCHASE, user, 'PO-003')
-            stock_in(products[4], wh1, 100, MovementType.IN_RECEIPT, user, 'RC-002')
-            stock_in(products[5], wh2, 25, MovementType.IN_PURCHASE, user, 'PO-004')
+            stock_in(
+                products[0], wh1, 50, MovementType.IN_PURCHASE, user, 'PO-001',
+                entry_date=today - timedelta(days=120), effective_date=today - timedelta(days=120),
+                expiry_date=today + timedelta(days=180),
+            )
+            stock_in(
+                products[1], wh1, 30, MovementType.IN_RECEIPT, user, 'RC-001',
+                entry_date=today - timedelta(days=90), effective_date=today - timedelta(days=90),
+                expiry_date=today + timedelta(days=60),
+            )
+            stock_in(
+                products[2], wh2, 20, MovementType.IN_PURCHASE, user, 'PO-002',
+                entry_date=today - timedelta(days=100), effective_date=today - timedelta(days=100),
+                expiry_date=today + timedelta(days=20),
+            )
+            stock_in(
+                products[3], wh1, 5, MovementType.IN_PURCHASE, user, 'PO-003',
+                entry_date=today - timedelta(days=200), effective_date=today - timedelta(days=200),
+                expiry_date=today - timedelta(days=10),
+            )
+            stock_in(
+                products[4], wh1, 100, MovementType.IN_RECEIPT, user, 'RC-002',
+                entry_date=today - timedelta(days=30), effective_date=today - timedelta(days=30),
+                expiry_date=today + timedelta(days=365),
+            )
+            stock_in(
+                products[5], wh2, 25, MovementType.IN_PURCHASE, user, 'PO-004',
+                entry_date=today - timedelta(days=80), effective_date=today - timedelta(days=80),
+                expiry_date=today + timedelta(days=15),
+            )
             stock_out(products[0], wh1, 10, MovementType.OUT_SALE, user, 'INV-001')
             stock_out(products[4], wh1, 20, MovementType.OUT_DISPATCH, user, 'DISP-001')
             transfer_stock(products[1], wh1, wh2, 5, user, 'TR-001')
 
-        self.stdout.write(self.style.SUCCESS('تم إنشاء البيانات التجريبية بنجاح.'))
+        self.stdout.write(self.style.SUCCESS('Demo data created successfully.'))

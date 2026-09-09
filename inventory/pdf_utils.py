@@ -147,7 +147,18 @@ def _build_pdf(title, subtitle, table_data, col_widths):
     return buffer.getvalue()
 
 
-def build_financial_pdf(by_warehouse, total_value):
+def _fmt_date(value):
+    if not value:
+        return '—'
+    if hasattr(value, 'strftime'):
+        if hasattr(value, 'hour'):
+            return value.strftime('%Y-%m-%d %H:%M:%S')
+        return value.strftime('%Y-%m-%d')
+    return str(value)
+
+
+def build_financial_pdf(by_warehouse, total_value, financial_movements=None, report_generated_at=None):
+    subtitle = f'تاريخ إنشاء التقرير: {_fmt_date(report_generated_at)}'
     rows = [[_cell('المستودع', _styles(), center=True), _cell('القيمة (ل.س)', _styles(), center=True)]]
     for row in by_warehouse:
         rows.append([
@@ -158,7 +169,36 @@ def build_financial_pdf(by_warehouse, total_value):
         _cell('الإجمالي', _styles()),
         Paragraph(_num(total_value), _styles()['cell']),
     ])
-    return _build_pdf('تقرير المخزون المالي', '', rows, [10 * cm, 6 * cm])
+    buffer = io.BytesIO()
+    styles = _styles()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, rightMargin=1.5 * cm, leftMargin=1.5 * cm, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
+    story = [Paragraph(ar('تقرير المخزون المالي'), styles['title']), Paragraph(ar(subtitle), styles['normal']), Spacer(1, 0.3 * cm)]
+    t1 = Table(rows, colWidths=[10 * cm, 6 * cm], repeatRows=1)
+    t1.setStyle(_table_style())
+    story.extend([Paragraph(ar('ملخص حسب المستودع'), styles['normal']), t1, Spacer(1, 0.5 * cm)])
+
+    if financial_movements:
+        mrows = [[
+            _cell('تاريخ ووقت العملية', _styles(), center=True),
+            _cell('النوع', _styles(), center=True),
+            _cell('المنتج', _styles(), center=True),
+            _cell('الكمية', _styles(), center=True),
+            _cell('القيمة', _styles(), center=True),
+        ]]
+        for m in financial_movements:
+            mrows.append([
+                Paragraph(_fmt_date(m.created_at), styles['cell']),
+                _cell(m.get_movement_type_display(), _styles()),
+                _cell(m.product.name, _styles()),
+                Paragraph(str(m.quantity), styles['cell']),
+                Paragraph(_num(m.quantity * m.product.price), styles['cell']),
+            ])
+        story.append(Paragraph(ar('سجل العمليات المالية'), styles['normal']))
+        t2 = Table(mrows, colWidths=[3.5 * cm, 3 * cm, 4 * cm, 2 * cm, 2.5 * cm], repeatRows=1)
+        t2.setStyle(_table_style())
+        story.append(t2)
+    doc.build(story)
+    return buffer.getvalue()
 
 
 def build_current_stock_pdf(stock_levels, total_value):
@@ -196,29 +236,43 @@ def build_turnover_pdf(outbound, days):
     return _build_pdf('تقرير دوران المخزون', f'الفترة: {days} يوم', rows, [7 * cm, 4 * cm, 4 * cm])
 
 
-def build_slow_moving_pdf(slow_products, days):
+def build_slow_moving_pdf(slow_stock, days, expired_stock=None):
     rows = [[
         _cell('المنتج', _styles(), center=True),
-        _cell('SKU', _styles(), center=True),
-        _cell('الكمية الحالية', _styles(), center=True),
-        _cell('الحد الأدنى', _styles(), center=True),
+        _cell('المستودع', _styles(), center=True),
+        _cell('الكمية', _styles(), center=True),
+        _cell('تاريخ الإدخال', _styles(), center=True),
+        _cell('تاريخ الفاعلية', _styles(), center=True),
+        _cell('تاريخ الصلاحية', _styles(), center=True),
+        _cell('الحالة', _styles(), center=True),
     ]]
-    for product in slow_products:
+    for item in slow_stock:
         rows.append([
-            _cell(product.name, _styles()),
-            Paragraph(product.sku, _styles()['cell']),
-            Paragraph(str(product.total or 0), _styles()['cell']),
-            Paragraph(str(product.min_quantity), _styles()['cell']),
+            _cell(item.product.name, _styles()),
+            _cell(item.warehouse.name, _styles()),
+            Paragraph(str(item.quantity), _styles()['cell']),
+            Paragraph(_fmt_date(item.entry_date), _styles()['cell']),
+            Paragraph(_fmt_date(item.effective_date), _styles()['cell']),
+            Paragraph(_fmt_date(item.expiry_date), _styles()['cell']),
+            _cell(item.expiry_status_label, _styles()),
         ])
-    return _build_pdf('تقرير المنتجات بطيئة الحركة', f'الفترة: {days} يوم', rows, [6 * cm, 3.5 * cm, 3.5 * cm, 3.5 * cm])
+    subtitle = f'الفترة: {days} يوم'
+    if expired_stock:
+        subtitle += f' | منتهي الصلاحية: {len(list(expired_stock))} مادة'
+    return _build_pdf('تقرير المنتجات بطيئة الحركة', subtitle, rows, [3.5 * cm, 2.5 * cm, 1.5 * cm, 2.5 * cm, 2.5 * cm, 2.5 * cm, 2 * cm])
 
 
 def render_report_pdf(report_type, context):
     builders = {
-        'financial': lambda ctx: build_financial_pdf(ctx['by_warehouse'], ctx['total_value']),
+        'financial': lambda ctx: build_financial_pdf(
+            ctx['by_warehouse'], ctx['total_value'],
+            ctx.get('financial_movements'), ctx.get('report_generated_at'),
+        ),
         'current_stock': lambda ctx: build_current_stock_pdf(ctx['stock_levels'], ctx['total_value']),
         'turnover': lambda ctx: build_turnover_pdf(ctx['outbound'], ctx['days']),
-        'slow_moving': lambda ctx: build_slow_moving_pdf(ctx['slow_products'], ctx['days']),
+        'slow_moving': lambda ctx: build_slow_moving_pdf(
+            ctx['slow_stock'], ctx['days'], ctx.get('expired_stock'),
+        ),
     }
     builder = builders.get(report_type)
     if not builder:

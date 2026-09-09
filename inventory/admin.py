@@ -19,13 +19,13 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(StockLevel)
 class StockLevelAdmin(admin.ModelAdmin):
-    list_display = ('product', 'warehouse', 'quantity', 'updated_at')
+    list_display = ('product', 'warehouse', 'quantity', 'entry_date', 'effective_date', 'expiry_date', 'updated_at')
     list_filter = ('warehouse',)
 
 
 @admin.register(StockMovement)
 class StockMovementAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'product', 'movement_type', 'quantity', 'user')
+    list_display = ('created_at', 'product', 'movement_type', 'quantity', 'entry_date', 'expiry_date', 'user')
     list_filter = ('movement_type', 'created_at')
     search_fields = ('product__name', 'reference_number')
 

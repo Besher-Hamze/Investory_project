@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.utils import timezone
 
+from .barcode_utils import generate_product_barcode
 from .models import MovementType, Product, StockMovement, Warehouse
 
 
@@ -113,8 +115,36 @@ class StockInForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-select'}),
     )
     quantity = forms.IntegerField(min_value=1, label='الكمية', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    entry_date = forms.DateField(
+        label='تاريخ إدخال المادة',
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        initial=timezone.localdate,
+    )
+    effective_date = forms.DateField(
+        label='تاريخ الفاعلية',
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        initial=timezone.localdate,
+        help_text='تاريخ بدء صلاحية المادة للبيع/الاستخدام',
+    )
+    expiry_date = forms.DateField(
+        label='تاريخ الصلاحية',
+        required=False,
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        help_text='مهم لمنتجات العناية — لتتبع بطيء الحركة والإتلاف',
+    )
     reference_number = forms.CharField(required=False, label='رقم المرجع', widget=forms.TextInput(attrs={'class': 'form-control'}))
     notes = forms.CharField(required=False, label='ملاحظات', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2}))
+
+    def clean(self):
+        cleaned = super().clean()
+        entry = cleaned.get('entry_date')
+        effective = cleaned.get('effective_date')
+        expiry = cleaned.get('expiry_date')
+        if expiry and entry and entry > expiry:
+            self.add_error('expiry_date', 'تاريخ الصلاحية يجب أن يكون بعد تاريخ الإدخال.')
+        if expiry and effective and effective > expiry:
+            self.add_error('effective_date', 'تاريخ الفاعلية يجب أن يكون قبل تاريخ الصلاحية.')
+        return cleaned
 
 
 class StockOutForm(forms.Form):
@@ -129,7 +159,11 @@ class StockOutForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-select'}),
     )
     movement_type = forms.ChoiceField(
-        choices=[(MovementType.OUT_SALE, 'فاتورة بيع'), (MovementType.OUT_DISPATCH, 'أمر صرف')],
+        choices=[
+            (MovementType.OUT_SALE, 'فاتورة بيع'),
+            (MovementType.OUT_DISPATCH, 'أمر صرف'),
+            (MovementType.OUT_EXPIRED, 'إتلاف منتهي الصلاحية'),
+        ],
         label='نوع العملية',
         widget=forms.Select(attrs={'class': 'form-select'}),
     )

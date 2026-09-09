@@ -1,4 +1,5 @@
 import uuid
+from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -80,6 +81,9 @@ class StockLevel(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='stock_levels', verbose_name='المنتج')
     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name='stock_levels', verbose_name='المستودع')
     quantity = models.PositiveIntegerField('الكمية', default=0)
+    entry_date = models.DateField('تاريخ إدخال المادة', null=True, blank=True)
+    expiry_date = models.DateField('تاريخ الصلاحية', null=True, blank=True)
+    effective_date = models.DateField('تاريخ الفاعلية', null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -90,12 +94,47 @@ class StockLevel(models.Model):
     def __str__(self):
         return f'{self.product.name} @ {self.warehouse.name}: {self.quantity}'
 
+    @property
+    def line_value(self):
+        return self.quantity * self.product.price
+
+    @property
+    def expiry_status(self):
+        today = timezone.localdate()
+        if not self.expiry_date:
+            return 'unknown'
+        if self.expiry_date < today:
+            return 'expired'
+        if self.expiry_date <= today + timedelta(days=30):
+            return 'expiring_soon'
+        if self.effective_date and self.effective_date > today:
+            return 'not_effective'
+        return 'ok'
+
+    @property
+    def expiry_status_label(self):
+        labels = {
+            'expired': 'منتهي الصلاحية',
+            'expiring_soon': 'قريب الانتهاء',
+            'not_effective': 'لم يفعّل بعد',
+            'ok': 'ساري',
+            'unknown': 'غير محدد',
+        }
+        return labels.get(self.expiry_status, '—')
+
+    @property
+    def days_until_expiry(self):
+        if not self.expiry_date:
+            return None
+        return (self.expiry_date - timezone.localdate()).days
+
 
 class MovementType(models.TextChoices):
     IN_PURCHASE = 'in_purchase', 'فاتورة شراء'
     IN_RECEIPT = 'in_receipt', 'أمر استلام'
     OUT_SALE = 'out_sale', 'فاتورة بيع'
     OUT_DISPATCH = 'out_dispatch', 'أمر صرف'
+    OUT_EXPIRED = 'out_expired', 'إتلاف منتهي الصلاحية'
     TRANSFER = 'transfer', 'نقل بين مستودعات'
 
 
@@ -119,8 +158,11 @@ class StockMovement(models.Model):
     quantity_after = models.PositiveIntegerField('الكمية بعد')
     reference_number = models.CharField('رقم المرجع', max_length=100, blank=True)
     notes = models.TextField('ملاحظات', blank=True)
+    entry_date = models.DateField('تاريخ إدخال المادة', null=True, blank=True)
+    expiry_date = models.DateField('تاريخ الصلاحية', null=True, blank=True)
+    effective_date = models.DateField('تاريخ الفاعلية', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='stock_movements', verbose_name='المستخدم')
-    created_at = models.DateTimeField('التاريخ', default=timezone.now)
+    created_at = models.DateTimeField('تاريخ ووقت العملية', default=timezone.now)
 
     class Meta:
         verbose_name = 'حركة مخزون'
@@ -139,6 +181,8 @@ class StockMovement(models.Model):
 
 class NotificationType(models.TextChoices):
     LOW_STOCK = 'low_stock', 'مخزون منخفض'
+    EXPIRY_SOON = 'expiry_soon', 'قرب انتهاء الصلاحية'
+    EXPIRED = 'expired', 'منتهي الصلاحية'
     SYSTEM = 'system', 'نظام'
 
 

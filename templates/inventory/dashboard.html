@@ -96,7 +96,7 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="card table-card">
+        <div class="card table-card mb-3">
             <div class="card-header bg-white"><h5 class="mb-0 text-danger"><i class="bi bi-exclamation-triangle"></i> تنبيهات الحد الأدنى</h5></div>
             <ul class="list-group list-group-flush">
                 {% for p in low_stock_products %}
@@ -107,6 +107,26 @@
                 {% empty %}
                 <li class="list-group-item text-muted text-center">لا توجد تنبيهات</li>
                 {% endfor %}
+            </ul>
+        </div>
+        <div class="card table-card">
+            <div class="card-header bg-white"><h5 class="mb-0 text-warning"><i class="bi bi-calendar-x"></i> تنبيهات الصلاحية</h5></div>
+            <ul class="list-group list-group-flush">
+                {% for s in expired_stock %}
+                <li class="list-group-item list-group-item-danger d-flex justify-content-between">
+                    <span>{{ s.product.name }} <small>({{ s.warehouse.name }})</small></span>
+                    <span class="badge bg-danger">منتهي {{ s.expiry_date }}</span>
+                </li>
+                {% endfor %}
+                {% for s in expiring_soon_stock %}
+                <li class="list-group-item list-group-item-warning d-flex justify-content-between">
+                    <span>{{ s.product.name }} <small>({{ s.warehouse.name }})</small></span>
+                    <span class="badge bg-warning text-dark">{{ s.days_until_expiry }} يوم</span>
+                </li>
+                {% endfor %}
+                {% if not expired_stock and not expiring_soon_stock %}
+                <li class="list-group-item text-muted text-center">لا توجد تنبيهات صلاحية</li>
+                {% endif %}
             </ul>
         </div>
     </div>

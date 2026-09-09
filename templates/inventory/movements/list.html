@@ -20,8 +20,9 @@
         <table class="table table-hover table-sm mb-0">
             <thead>
                 <tr>
-                    <th>الوقت</th><th>المستخدم</th><th>المنتج</th><th>نوع العملية</th>
-                    <th>المستودع</th><th>الكمية</th><th>قبل</th><th>بعد</th><th>المرجع</th>
+                    <th>تاريخ ووقت العملية</th><th>المستخدم</th><th>المنتج</th><th>نوع العملية</th>
+                    <th>المستودع</th><th>الكمية</th><th>قبل</th><th>بعد</th>
+                    <th>إدخال</th><th>فاعلية</th><th>صلاحية</th><th>المرجع</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,10 +42,13 @@
                 <td>{{ m.quantity }}</td>
                 <td>{{ m.quantity_before }}</td>
                 <td>{{ m.quantity_after }}</td>
+                <td>{{ m.entry_date|default:"—" }}</td>
+                <td>{{ m.effective_date|default:"—" }}</td>
+                <td>{{ m.expiry_date|default:"—" }}</td>
                 <td>{{ m.reference_number|default:"—" }}</td>
             </tr>
             {% empty %}
-            <tr><td colspan="9" class="text-center text-muted py-4">لا توجد حركات</td></tr>
+            <tr><td colspan="12" class="text-center text-muted py-4">لا توجد حركات</td></tr>
             {% endfor %}
             </tbody>
         </table>
